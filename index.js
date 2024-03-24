@@ -21,6 +21,23 @@ app.get("/", (req, res) => {
   res.json("HAYO MAU NGAPAIN BANG? IZIN DULU GIH KALAU MAU MASUK KE SINI!");
 });
 
+app.get("/api/v1/listActivity", async (req, res) => {
+  const listActivity = await prisma.listActivity.findMany();
+
+  if (!listActivity) {
+    res.json({
+      error: true,
+      message: "Unsuccessful get data list activity",
+    });
+  }
+
+  res.json({
+    error: false,
+    message: "Successful get data list activity",
+    data: listActivity,
+  });
+});
+
 app.get("/api/v1/activity", async (req, res) => {
   const listImage = await prisma.storageImage.findMany({
     select: {
@@ -37,7 +54,11 @@ app.get("/api/v1/activity", async (req, res) => {
     });
   }
 
-  console.log("List : ", listImage);
+  res.json({
+    error: false,
+    message: "Successful get data image",
+    data: listImage,
+  })
 
   //   const data = listImage.map((item) => {
   //     return {
