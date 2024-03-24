@@ -21,10 +21,6 @@ app.get("/", (req, res) => {
   res.json("HAYO MAU NGAPAIN BANG? IZIN DULU GIH KALAU MAU MASUK KE SINI!");
 });
 
-app.all("*", (req, res) => {
-  res.status(404).json({ message: "Route not found" });
-});
-
 app.get("/api/v1/activity", async (req, res) => {
   const listImage = await prisma.storageImage.findMany({
     select: {
@@ -71,6 +67,10 @@ app.get("/api/v1/activity", async (req, res) => {
   //     message: "Successful get data image",
   //     data: getUnique,
   //   });
+});
+
+app.all("*", (req, res) => {
+  res.status(404).json({ message: "Route not found" });
 });
 
 const port = process.env.PORT || 3000;
