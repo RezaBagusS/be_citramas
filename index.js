@@ -31,7 +31,7 @@ app.get("/api/v1/activity", async (req, res) => {
   });
 
   if (!listImage) {
-    res.send({
+    res.json({
       error: true,
       message: "Unsuccessful get data image",
     });
